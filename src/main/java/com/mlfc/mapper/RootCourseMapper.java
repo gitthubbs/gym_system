@@ -3,6 +3,9 @@ package com.mlfc.mapper;
 import com.mlfc.entity.Course;
 import com.mlfc.entity.CourseCount;
 import org.apache.ibatis.annotations.*;
+
+import java.util.List;
+
 @Mapper
 public interface RootCourseMapper {
 
@@ -16,6 +19,9 @@ public interface RootCourseMapper {
 
     @Delete("delete from public_timetable where course_id = #{courseId}")
     void deleteRootCourse(@Param("courseId") Integer courseId);
+
+    @Update("delete from public_timetable where course_id in (#{courseIds})")
+    void deleteRootCourseMultiple(@Param("courseIds") List<Integer> courseIds);
 
     @Update("update public_timetable set course_name = #{course.courseName}," +
             " week = #{course.week}," +

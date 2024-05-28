@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 
 @Slf4j
@@ -38,6 +39,11 @@ public class RootCourseServiceImpl implements RootCourseService {
         }
         rootCourseMapper.deleteRootCourse(id);
         log.info("删除课程成功");
+    }
+
+    @Override
+    public void deleteRootCourseMultiple(List<Integer> courseIds) {
+        rootCourseMapper.deleteRootCourseMultiple(courseIds);
     }
 
     @Override
