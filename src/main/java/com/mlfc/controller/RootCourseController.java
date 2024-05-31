@@ -57,4 +57,5 @@ public class RootCourseController {
         rootCourseService.updateRootCourse(course);
         return Rest.success("更新课程成功");
     }
+
 }

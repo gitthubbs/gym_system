@@ -23,9 +23,13 @@ public class RootCourseServiceImpl implements RootCourseService {
 
     @Override
     public void addRootCoursePublic(Course course) throws MyCustomException {
-        if(rootCourseMapper.isCourseExist(course.getCourseId())){
-            log.error("课程id已存在");
-            throw new MyCustomException("课程id已存在");
+        if(rootCourseMapper.isCourseExistByClassroom(course)){
+            log.error("该教室此时间有课");
+            throw new MyCustomException("该教室此时间有课");
+        }
+        if(rootCourseMapper.isCourseExistByTeacher(course )){
+            log.error("该老师此时间有课");
+            throw new MyCustomException("该老师此时间有课");
         }
         rootCourseMapper.addCoursePublic(course);
         log.info("添加课程成功");
@@ -33,7 +37,7 @@ public class RootCourseServiceImpl implements RootCourseService {
 
     @Override
     public void deleteRootCourse(Integer id) throws MyCustomException {
-        if(!rootCourseMapper.isCourseExist(id)){
+        if(!rootCourseMapper.isCourseIdExist(id)){
             log.error("课程不存在");
             throw new MyCustomException("课程不存在");
         }
@@ -48,7 +52,7 @@ public class RootCourseServiceImpl implements RootCourseService {
 
     @Override
     public void updateRootCourse(Course course) throws MyCustomException {
-        if(!rootCourseMapper.isCourseExist(course.getCourseId())){
+        if(!rootCourseMapper.isCourseIdExist(course.getCourseId())){
             log.error("课程不存在");
             throw new MyCustomException("课程不存在");
         }
@@ -58,9 +62,13 @@ public class RootCourseServiceImpl implements RootCourseService {
 
     @Override
     public void addRootCoursePrivate(Course course) throws MyCustomException {
-        if(rootCourseMapper.isCourseExist(course.getCourseId())){
-            log.error("课程id已存在");
-            throw new MyCustomException("课程id已存在");
+        if(rootCourseMapper.isCourseExistByClassroom(course)){
+            log.error("该教室此时间有课");
+            throw new MyCustomException("该教室此时间有课");
+        }
+        if(rootCourseMapper.isCourseExistByTeacher(course )){
+            log.error("该老师此时间有课");
+            throw new MyCustomException("该老师此时间有课");
         }
         rootCourseMapper.addCoursePrivate(course);
         log.info("添加课程成功");

@@ -35,8 +35,15 @@ public interface RootCourseMapper {
     void updateRootCourse(@Param("course") Course course);
 
     @Select("SELECT EXISTS(SELECT 1 FROM public_timetable WHERE course_id = #{course.courseId})")
-    Boolean isCourseExist(@Param("courseId") Integer courseId);
+    Boolean isCourseIdExist(@Param("courseId") Integer courseId);
 
+    @Select("SELECT EXISTS(SELECT 1 FROM public_timetable WHERE week = #{course.week} AND time = #{course.time} AND teacher_id = #{course.teacherId} " +
+            "UNION ALL SELECT 1 FROM personal_timetable WHERE week = #{course.week} AND time = #{course.time} AND teacher_id = #{course.teacherId})")
+    Boolean isCourseExistByTeacher(@Param("course") Course course);
+
+    @Select("SELECT EXISTS(SELECT 1 FROM public_timetable WHERE week = #{course.week} AND time = #{course.time} AND classroom = #{course.classroom} " +
+            "UNION ALL SELECT 1 FROM personal_timetable WHERE week = #{course.week} AND time = #{course.time} AND classroom = #{course.classroom})")
+    Boolean isCourseExistByClassroom(@Param("course") Course course);
 
 
 }
