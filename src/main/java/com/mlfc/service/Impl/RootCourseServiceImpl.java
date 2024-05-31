@@ -48,6 +48,7 @@ public class RootCourseServiceImpl implements RootCourseService {
     @Override
     public void deleteRootCourseMultiple(List<Integer> courseIds) {
         rootCourseMapper.deleteRootCourseMultiple(courseIds);
+        log.info("删除课程成功");
     }
 
     @Override

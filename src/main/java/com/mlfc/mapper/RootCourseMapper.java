@@ -20,7 +20,12 @@ public interface RootCourseMapper {
     @Delete("delete from public_timetable where course_id = #{courseId}")
     void deleteRootCourse(@Param("courseId") Integer courseId);
 
-    @Update("delete from public_timetable where course_id in (#{courseIds})")
+    @Delete("<script>" +
+            "DELETE FROM public_timetable WHERE course_id IN " +
+            "<foreach item='itemId' collection='courseIds' open='(' separator=',' close=')'>" +
+            "#{itemId}" +
+            "</foreach>" +
+            "</script>")
     void deleteRootCourseMultiple(@Param("courseIds") List<Integer> courseIds);
 
     @Update("update public_timetable set course_name = #{course.courseName}," +
