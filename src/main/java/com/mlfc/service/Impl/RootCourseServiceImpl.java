@@ -56,6 +56,14 @@ public class RootCourseServiceImpl implements RootCourseService {
             log.error("课程不存在");
             throw new MyCustomException("课程不存在");
         }
+        if(rootCourseMapper.isCourseExistByClassroom(course)){
+            log.error("该教室此时间有课");
+            throw new MyCustomException("该教室此时间有课");
+        }
+        if(rootCourseMapper.isCourseExistByTeacher(course )){
+            log.error("该老师此时间有课");
+            throw new MyCustomException("该老师此时间有课");
+        }
         rootCourseMapper.updateRootCourse(course);
         log.info("修改课程成功");
     }
