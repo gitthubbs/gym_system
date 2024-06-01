@@ -58,4 +58,11 @@ public class RootCourseController {
         return Rest.success("更新课程成功");
     }
 
+    @PutMapping("clear")
+    public Rest<String> clearBooked() throws MyCustomException {
+        log.info("清空已预约课程");
+        rootCourseService.ClearBooked();
+        return Rest.success("清空已预约课程成功");
+    }
+
 }

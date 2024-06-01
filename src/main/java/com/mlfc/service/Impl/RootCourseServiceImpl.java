@@ -82,4 +82,13 @@ public class RootCourseServiceImpl implements RootCourseService {
         rootCourseMapper.addCoursePrivate(course);
         log.info("添加课程成功");
     }
+
+    @Override
+    public void ClearBooked() throws MyCustomException {
+        rootCourseMapper.ClearBooked();
+        rootCourseMapper.ClearPersonal();
+        log.info("清空预约成功");
+    }
+
+
 }

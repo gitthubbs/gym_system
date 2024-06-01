@@ -1,7 +1,6 @@
 package com.mlfc.mapper;
 
 import com.mlfc.entity.Course;
-import com.mlfc.entity.CourseCount;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -42,13 +41,15 @@ public interface RootCourseMapper {
     @Select("SELECT EXISTS(SELECT 1 FROM public_timetable WHERE course_id = #{course.courseId})")
     Boolean isCourseIdExist(@Param("courseId") Integer courseId);
 
-    @Select("SELECT EXISTS(SELECT 1 FROM public_timetable WHERE week = #{course.week} AND time = #{course.time} AND teacher_id = #{course.teacherId} " +
-            "UNION ALL SELECT 1 FROM personal_timetable WHERE week = #{course.week} AND time = #{course.time} AND teacher_id = #{course.teacherId})")
+    @Select("SELECT EXISTS(SELECT 1 FROM public_timetable WHERE week = #{course.week} AND time = #{course.time} AND teacher_id = #{course.teacherId} ")
     Boolean isCourseExistByTeacher(@Param("course") Course course);
 
-    @Select("SELECT EXISTS(SELECT 1 FROM public_timetable WHERE week = #{course.week} AND time = #{course.time} AND classroom = #{course.classroom} " +
-            "UNION ALL SELECT 1 FROM personal_timetable WHERE week = #{course.week} AND time = #{course.time} AND classroom = #{course.classroom})")
+    @Select("SELECT EXISTS(SELECT 1 FROM public_timetable WHERE week = #{course.week} AND time = #{course.time} AND classroom = #{course.classroom} ")
     Boolean isCourseExistByClassroom(@Param("course") Course course);
 
+    @Update("update public_timetable set booked = #{course.booked}")
+    void ClearBooked();
 
+    @Delete("DELETE FROM personal_timetable")
+    void ClearPersonal();
 }

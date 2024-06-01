@@ -16,4 +16,6 @@ public interface RootCourseService {
     void updateRootCourse(Course course) throws MyCustomException;
 
     void addRootCoursePrivate(Course course) throws MyCustomException;
+
+    void ClearBooked() throws MyCustomException;
 }
